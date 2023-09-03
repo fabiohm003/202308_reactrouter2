@@ -1,10 +1,26 @@
 import React from 'react';
+import { TodoForm } from '../../ui/TodoForm';
+import { useTodos } from '../useTodos';
+import { useParams } from 'react-router-dom';
 
 function EditTodoPage() {
-  return (
-    <h1>EditTodoPage</h1>
-  );
 
+
+  const params = useParams();
+  const id = Number(params.id); 
+
+
+  const { stateUpdaters } = useTodos();
+  const { editTodo } = stateUpdaters;
+
+
+  return (
+    <TodoForm
+      label="Edita tu TODO"
+      submitText="Editar"
+      submitEvent={(newText) => editTodo(id, newText)}
+    />
+  );
 }
 
-export {EditTodoPage};
+export { EditTodoPage };
